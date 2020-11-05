@@ -15,20 +15,26 @@ def my_sum(*args):
     :type args float or int number
     """
     elm_sum = 0
+    exit_program = False
     for arg in args:
         try:
             elm_sum += float(arg)
         except ValueError as e:
             print(f'Недопустимый тип данных {e}')
+            exit_program = True
             break
-    return elm_sum
+    return elm_sum, exit_program
 
 
 total_sum = 0
 start_sum = 0
+
 while True:
     user_answer = input('Введите числа через пробел:\n>>>').split()
     elm_list = user_answer
-    start_sum = my_sum(*elm_list)
+    start_sum, end_program = my_sum(*elm_list)
     total_sum += start_sum
     print(total_sum)
+
+    if end_program:
+        break
